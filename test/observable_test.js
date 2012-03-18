@@ -25,4 +25,10 @@ TestCase("ObservableAddObserverTest", {
 
         assertEquals(observers, observable.observers);
     }
-})
+});
+
+TestCase("ObservableHasObserverTest", {
+    "test should return true when has observer" : function(){
+        // TODO P227から再開
+    }
+});
