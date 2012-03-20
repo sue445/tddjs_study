@@ -18,7 +18,7 @@
         this.observers.push(observer);
     }
 
-    function hasObserver(observer){
+    function hasObserver(event, observer){
         if(!this.observers){
             return false;
         }

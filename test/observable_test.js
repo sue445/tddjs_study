@@ -17,8 +17,8 @@ TestCase("ObservableAddObserverTest", {
         this.observable.observe("event", observers[0]);
         this.observable.observe("event", observers[1]);
 
-        assertTrue(this.observable.hasObserver(observers[0]));
-        assertTrue(this.observable.hasObserver(observers[1]));
+        assertTrue(this.observable.hasObserver("event", observers[0]));
+        assertTrue(this.observable.hasObserver("event", observers[1]));
     },
 
     "test should throw for uncallable observer": function(){
@@ -35,7 +35,7 @@ TestCase("ObservableHasObserverTest", {
     },
 
     "test should return false when no observers" : function(){
-        assertFalse(this.observable.hasObserver(function(){}));
+        assertFalse(this.observable.hasObserver("event", function(){}));
     }
 });
 
