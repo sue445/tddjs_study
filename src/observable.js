@@ -5,14 +5,7 @@
  * Time: 22:38
  * To change this template use File | Settings | File Templates.
  */
-tddjs.namespace("util");
-
 (function(){
-    function Observable(){
-    }
-
-    tddjs.util.Observable = Observable;
-
     function addObserver(observer){
         if(!this.observers){
             this.observers = [];
@@ -24,8 +17,6 @@ tddjs.namespace("util");
 
         this.observers.push(observer);
     }
-
-    Observable.prototype.addObserver = addObserver;
 
     function hasObserver(observer){
         if(!this.observers){
@@ -41,9 +32,6 @@ tddjs.namespace("util");
         return false;
     }
 
-    Observable.prototype.hasObserver = hasObserver;
-
-
     function notifyObservers(){
         if(!this.observers){
             return;
@@ -56,5 +44,9 @@ tddjs.namespace("util");
         }
     }
 
-    Observable.prototype.notifyObservers = notifyObservers;
+    tddjs.namespace("util").observable = {
+        addObserver: addObserver,
+        hasObserver: hasObserver,
+        notifyObservers: notifyObservers
+    };
 }());
