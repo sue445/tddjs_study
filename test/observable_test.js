@@ -97,6 +97,22 @@ TestCase("ObservableNotifyObserversTest", {
         assertNoException(function(){
             observable.notify("event");
         })
+    },
+
+    "test should only relevant observers only": function(){
+        var calls = [];
+
+        this.observable.observe("event", function(){
+            calls.push("event");
+        });
+
+        this.observable.observe("other", function(){
+            calls.push("other");
+        });
+
+        this.observable.notify("other");
+
+        assertEquals(["other"], calls);
     }
 
 

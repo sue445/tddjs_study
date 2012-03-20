@@ -6,25 +6,31 @@
  * To change this template use File | Settings | File Templates.
  */
 (function(){
-    function observe(event, observer){
-        if(!this.observers){
-            this.observers = [];
+    function _observers(observable, event){
+        if(!observable.observers){
+            observable.observers = {};
         }
 
+        if(!observable.observers[event]){
+            observable.observers[event] = [];
+        }
+
+        return observable.observers[event];
+    }
+
+    function observe(event, observer){
         if(typeof observer != "function"){
             throw new TypeError("observer is not function");
         }
 
-        this.observers.push(observer);
+        _observers(this, event).push(observer);
     }
 
     function hasObserver(event, observer){
-        if(!this.observers){
-            return false;
-        }
+        var observers = _observers(this, event);
 
         for(var i = 0, l = this.observers.length; i < l; i++){
-            if(this.observers[i] == observer){
+            if(observers[i] == observer){
                 return true;
             }
         }
@@ -33,15 +39,12 @@
     }
 
     function notify(event){
-        if(!this.observers){
-            return;
-        }
-
+        var observers = _observers(this, event);
         var args = Array.prototype.slice.call(arguments, 1);
 
-        for(var i = 0, l = this.observers.length; i < l; i++){
+        for(var i = 0, l = observers.length; i < l; i++){
             try {
-                this.observers[i].apply(this, args);
+                observers[i].apply(this, args);
             } catch (e){}
         }
     }
