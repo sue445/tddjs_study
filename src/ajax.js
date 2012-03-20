@@ -5,7 +5,10 @@
  * Time: 22:52
  * To change this template use File | Settings | File Templates.
  */
-tddjs.namespace("ajax").create = function(){
+(function(){
+    var xhr;
+    var ajax = tddjs.namespace("ajax");
+
     var options = [
         function(){
             return new ActiveXObject("Microsoft.XMLHTTP");
@@ -18,9 +21,9 @@ tddjs.namespace("ajax").create = function(){
 
     for(var i = 0, l = options.length; i < l; i++){
         try{
-            return options[i]();
+            xhr = options[i]();
+            ajax.create = options[i];
+            break;
         } catch(e){}
     }
-
-    return null;
-};
+}());
