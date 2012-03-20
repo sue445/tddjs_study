@@ -37,9 +37,11 @@
             return;
         }
 
+        var args = Array.prototype.slice.call(arguments, 1);
+
         for(var i = 0, l = this.observers.length; i < l; i++){
             try {
-                this.observers[i].apply(this, arguments);
+                this.observers[i].apply(this, args);
             } catch (e){}
         }
     }
