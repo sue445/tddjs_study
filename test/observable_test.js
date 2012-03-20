@@ -7,16 +7,7 @@
  */
 
 TestCase("ObservableAddObserverTest", {
-    "test should store function(single)" : function(){
-        var observable = new tddjs.util.Observable();
-        var observer = function(){};
-
-        observable.addObserver(observer);
-
-        assertEquals(observer, observable.observers[0]);
-    },
-
-    "test should store function(multiple)" : function(){
+    "test should store function" : function(){
         var observable = new tddjs.util.Observable();
         var observers = [function(){}, function(){}];
 
