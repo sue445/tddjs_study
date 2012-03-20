@@ -39,7 +39,9 @@ tddjs.namespace("util");
 
     function notifyObservers(){
         for(var i = 0, l = this.observers.length; i < l; i++){
-            this.observers[i].apply(this, arguments);
+            try {
+                this.observers[i].apply(this, arguments);
+            } catch (e){}
         }
     }
 
