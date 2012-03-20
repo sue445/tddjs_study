@@ -22,13 +22,6 @@ var tddjs = (function(){
         return object;
     }
 
-    return {
-        namespace : namespace
-    };
-}());
-
-
-tddjs.isHostMethod = (function(){
     function isHostMethod(object, property){
         var type = typeof object[property];
 
@@ -37,5 +30,8 @@ tddjs.isHostMethod = (function(){
             type == "unknown";
     }
 
-    return isHostMethod;
+    return {
+        namespace : namespace,
+        isHostMethod : isHostMethod
+    };
 }());
