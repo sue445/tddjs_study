@@ -21,7 +21,13 @@ tddjs.namespace("util");
     Observable.prototype.addObserver = addObserver;
 
     function hasObserver(observer){
-        return this.observers.indexOf(observer) >= 0;
+        for(var i = 0, l = this.observers.length; i < l; i++){
+            if(this.observers[i] == observer){
+                return true;
+            }
+        }
+
+        return false;
     }
 
     Observable.prototype.hasObserver = hasObserver;
