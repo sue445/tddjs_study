@@ -50,7 +50,7 @@ TestCase("ObservableNotifyObserversTest", {
 
         this.observable.observe("event", observer1);
         this.observable.observe("event", observer2);
-        this.observable.notify();
+        this.observable.notify("event");
 
         assertTrue(observer1.called);
         assertTrue(observer2.called);
@@ -63,7 +63,7 @@ TestCase("ObservableNotifyObserversTest", {
             actual = arguments;
         });
 
-        this.observable.notify("String", 1, 32);
+        this.observable.notify("event", "String", 1, 32);
 
         assertEquals(["String", 1, 32], actual);
     },
@@ -95,7 +95,7 @@ TestCase("ObservableNotifyObserversTest", {
     "test should not fail if no observers": function(){
         var observable = this.observable;
         assertNoException(function(){
-            observable.notify();
+            observable.notify("event");
         })
     }
 

@@ -32,7 +32,7 @@
         return false;
     }
 
-    function notify(){
+    function notify(event){
         if(!this.observers){
             return;
         }
