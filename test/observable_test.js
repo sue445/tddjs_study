@@ -45,8 +45,8 @@ TestCase("ObservableNotifyObserversTest", {
     },
 
     "test should call all observers" : function(){
-        var observer1 = function(){ observer1.called = true; };
-        var observer2 = function(){ observer2.called = true; };
+        var observer1 = function(){ observer1.called = true; }
+        var observer2 = function(){ observer2.called = true; }
 
         this.observable.addObserver(observer1);
         this.observable.addObserver(observer2);
@@ -81,8 +81,8 @@ TestCase("ObservableNotifyObserversTest", {
 
     "test should call observers in the order they were added" : function(){
         var calls = [];
-        var observer1 = function(){calls.push(observer1); };
-        var observer2 = function(){calls.push(observer2); };
+        var observer1 = function(){calls.push(observer1); }
+        var observer2 = function(){calls.push(observer2); }
 
         this.observable.addObserver(observer1);
         this.observable.addObserver(observer2);
