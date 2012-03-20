@@ -73,5 +73,20 @@ TestCase("ObservableNotifyObserversTest", {
         observable.notifyObservers();
 
         assertTrue(observer2.called);
+    },
+
+    "test should call observers in the order they were added" : function(){
+        var observable = new tddjs.util.Observable();
+        var calls = [];
+        var observer1 = function(){calls.push(observer1); };
+        var observer2 = function(){calls.push(observer2); };
+
+        observable.addObserver(observer1);
+        observable.addObserver(observer2);
+        observable.notifyObservers();
+
+        assertEquals(observer1, calls[0]);
+        assertEquals(observer2, calls[1]);
     }
+
 });
