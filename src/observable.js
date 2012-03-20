@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 (function(){
-    function observe(observer){
+    function observe(event, observer){
         if(!this.observers){
             this.observers = [];
         }

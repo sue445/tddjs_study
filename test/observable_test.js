@@ -14,8 +14,8 @@ TestCase("ObservableAddObserverTest", {
     "test should store function" : function(){
         var observers = [function(){}, function(){}];
 
-        this.observable.observe(observers[0]);
-        this.observable.observe(observers[1]);
+        this.observable.observe("event", observers[0]);
+        this.observable.observe("event", observers[1]);
 
         assertTrue(this.observable.hasObserver(observers[0]));
         assertTrue(this.observable.hasObserver(observers[1]));
@@ -48,8 +48,8 @@ TestCase("ObservableNotifyObserversTest", {
         var observer1 = function(){ observer1.called = true; }
         var observer2 = function(){ observer2.called = true; }
 
-        this.observable.observe(observer1);
-        this.observable.observe(observer2);
+        this.observable.observe("event", observer1);
+        this.observable.observe("event", observer2);
         this.observable.notify();
 
         assertTrue(observer1.called);
@@ -59,7 +59,7 @@ TestCase("ObservableNotifyObserversTest", {
     "test should pass through arguments" : function(){
         var actual;
 
-        this.observable.observe(function(){
+        this.observable.observe("event", function(){
             actual = arguments;
         });
 
@@ -72,8 +72,8 @@ TestCase("ObservableNotifyObserversTest", {
         var observer1 = function(){ throw new Error("Oops"); }
         var observer2 = function(){ observer2.called = true; }
 
-        this.observable.observe(observer1);
-        this.observable.observe(observer2);
+        this.observable.observe("event", observer1);
+        this.observable.observe("event", observer2);
         this.observable.notify();
 
         assertTrue(observer2.called);
@@ -84,8 +84,8 @@ TestCase("ObservableNotifyObserversTest", {
         var observer1 = function(){calls.push(observer1); }
         var observer2 = function(){calls.push(observer2); }
 
-        this.observable.observe(observer1);
-        this.observable.observe(observer2);
+        this.observable.observe("event", observer1);
+        this.observable.observe("event", observer2);
         this.observable.notify();
 
         assertEquals(observer1, calls[0]);
