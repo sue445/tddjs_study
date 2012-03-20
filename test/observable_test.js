@@ -26,3 +26,18 @@ TestCase("ObservableHasObserverTest", {
         assertFalse(observable.hasObserver(function(){}));
     }
 });
+
+TestCase("ObservableNotifyObserversTest", {
+    "test should call all observers" : function(){
+        var observable = new tddjs.util.Observable();
+        var observer1 = function(){ observer1.called = true; };
+        var observer2 = function(){ observer2.called = true; };
+
+        observable.addObserver(observer1);
+        observable.addObserver(observer2);
+        observable.notifyObservers();
+
+        assertTrue(observer1.called);
+        assertTrue(observer2.called);
+    }
+});
