@@ -14,20 +14,12 @@ TestCase("ObservableAddObserverTest", {
         observable.addObserver(observers[0]);
         observable.addObserver(observers[1]);
 
-        assertEquals(observers, observable.observers);
+        assertTrue(observable.hasObserver(observers[0]));
+        assertTrue(observable.hasObserver(observers[1]));
     }
 });
 
 TestCase("ObservableHasObserverTest", {
-    "test should return true when has observer" : function(){
-        var observable = new tddjs.util.Observable();
-        var observer = function(){};
-
-        observable.addObserver(observer);
-
-        assertTrue(observable.hasObserver(observer));
-    },
-
     "test should return false when no observers" : function(){
         var observable = new tddjs.util.Observable();
 
