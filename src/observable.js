@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 (function(){
-    function addObserver(observer){
+    function observe(observer){
         if(!this.observers){
             this.observers = [];
         }
@@ -32,7 +32,7 @@
         return false;
     }
 
-    function notifyObservers(){
+    function notify(){
         if(!this.observers){
             return;
         }
@@ -45,8 +45,8 @@
     }
 
     tddjs.namespace("util").observable = {
-        addObserver: addObserver,
+        observe: observe,
         hasObserver: hasObserver,
-        notifyObservers: notifyObservers
+        notify: notify
     };
 }());
