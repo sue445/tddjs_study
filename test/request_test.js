@@ -8,7 +8,11 @@
 TestCase("GetRequestTest", {
     "test should define get method" : function(){
         assertFunction(tddjs.ajax.get);
-    }
+    },
 
-    // TODO P254までやった
+    "test should throw error without url" : function(){
+        assertException(function(){
+            tddjs.ajax.get();
+        }, "TypeError");
+    }
 });

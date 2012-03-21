@@ -5,4 +5,8 @@
  * Time: 0:08
  * To change this template use File | Settings | File Templates.
  */
-tddjs.namespace("ajax").get = function(){};
+tddjs.namespace("ajax").get = function(url){
+    if(typeof url != "string"){
+        throw new TypeError("URL should be string");
+    }
+};
