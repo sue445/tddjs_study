@@ -12,6 +12,8 @@
         if(typeof url != "string"){
             throw new TypeError("URL should be string");
         }
+
+        var transport = tddjs.ajax.create();
     }
 
     ajax.get = get;
