@@ -21,7 +21,7 @@ function startSuccessfulGetTest(){
     }
 
     try{
-        if(tddjs.ajax && tddjs.get){
+        if(tddjs.ajax && tddjs.ajax.get){
             var id = new Date().getTime();
 
             tddjs.ajax.get("fragment.html?id=" + id, {
@@ -30,7 +30,7 @@ function startSuccessfulGetTest(){
                 }
             });
         } else{
-            log("Browser does not suport tddjs.ajax.get");
+            log("Browser does not suport tddjs.ajax.get: tddjs.ajax=" + tddjs.ajax + ", tddjs.ajax.get=" + tddjs.ajax.get);
         }
     } catch(e){
         log("An exception occuerd: " + e.message);
