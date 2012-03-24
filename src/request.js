@@ -8,6 +8,11 @@
 (function(){
     var ajax = tddjs.namespace("ajax");
 
+    // It's error on WebStorm
+//    if(!ajax.create){
+//        return;
+//    }
+
     function get(url){
         if(typeof url != "string"){
             throw new TypeError("URL should be string");
