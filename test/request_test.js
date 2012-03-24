@@ -33,7 +33,23 @@
             ajax.get("/url");
 
             assert(ajax.create.called);
+        },
+
+        "test should call open with method, url, async flag" : function(){
+            var actual;
+
+            ajax.create = stubFn({
+                open: function(){
+                    actual = arguments;
+                }
+            });
+
+            var url = "/url";
+            ajax.get(url);
+
+            assertEquals(["GET", url, true], actual);
         }
+
     });
 }());
 

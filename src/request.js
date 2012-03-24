@@ -14,6 +14,7 @@
         }
 
         var transport = tddjs.ajax.create();
+        transport.open("GET", url, true);
     }
 
     ajax.get = get;
