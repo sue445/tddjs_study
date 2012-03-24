@@ -52,6 +52,12 @@
             ajax.get("/url");
 
             assert(this.xhr.send.called);
+        },
+
+        "test should pass null as argument to send" : function(){
+            ajax.get("/url");
+
+            assertNull(this.xhr.send.args[0]);
         }
     });
 
