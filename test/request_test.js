@@ -93,6 +93,15 @@
             assertNoException(function(){
                 this.xhr.onreadystatechange();
             }.bind(this));
+        },
+
+        "test should reset onreadystatechange when complete" : function(){
+            this.xhr.readyState = 4;
+            ajax.get("/url");
+
+            this.xhr.onreadystatechange();
+
+            assertSame(tddjs.noop, this.xhr.onreadystatechange);
         }
     });
 }());

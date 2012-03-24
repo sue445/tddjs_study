@@ -5,6 +5,8 @@
  * Time: 0:08
  * To change this template use File | Settings | File Templates.
  */
+tddjs.noop = function(){};
+
 (function(){
     var ajax = tddjs.namespace("ajax");
 
@@ -32,6 +34,7 @@
         transport.onreadystatechange = function(){
             if(transport.readyState == 4){
                 requestComplete(transport, options);
+                transport.onreadystatechange = tddjs.noop;
             }
         };
         transport.send(null);
