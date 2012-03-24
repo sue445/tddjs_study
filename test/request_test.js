@@ -29,7 +29,7 @@
             }, "TypeError");
         },
 
-        "test should obtainan XMLHttpRequest object" : function(){
+        "test should obtain XMLHttpRequest object" : function(){
             ajax.get("/url");
 
             assert(ajax.create.called);
