@@ -11,7 +11,9 @@ tddjs.noop = function(){};
     var ajax = tddjs.namespace("ajax");
 
     function requestComplete(transpot, options){
-        if(transpot.status == 200){
+        var status = transpot.status;
+
+        if(status == 200 || (tddjs.isLocal() && !status)){
             if(typeof options.success == "function"){
                 options.success(transpot);
             }
