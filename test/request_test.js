@@ -54,5 +54,29 @@
             assert(this.xhr.send.called);
         }
     });
+
+    TestCase("ReadyStateHandlerTest", {
+        setUp: function(){
+            this.ajaxCreate = ajax.create;
+            this.xhr = Object.create(fakeXMLHttpRequest);
+            ajax.create = stubFn(this.xhr);
+        },
+
+        tearDown: function(){
+            ajax.create = this.ajaxCreate;
+        },
+
+        "test should call success handler for status 200" : function(){
+            this.xhr.readyState = 4;
+            this.xhr.status = 200;
+
+            var success = stubFn();
+
+            ajax.get("/url", {success : success});
+            this.xhr.onreadystatechange();
+
+            assert(success.called);
+        }
+    });
 }());
 
