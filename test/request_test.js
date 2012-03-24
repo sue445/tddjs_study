@@ -46,7 +46,14 @@
             ajax.get("/url");
 
             assertFunction(this.xhr.onreadystatechange);
+        },
+
+        "test should call send" : function(){
+            ajax.get("/url");
+
+            assert(this.xhr.send.called);
         }
+
 
     });
 }());
