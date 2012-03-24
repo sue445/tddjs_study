@@ -53,8 +53,6 @@
 
             assert(this.xhr.send.called);
         }
-
-
     });
 }());
 
