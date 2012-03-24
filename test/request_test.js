@@ -76,6 +76,17 @@
             this.xhr.onreadystatechange();
 
             assert(success.called);
+        },
+
+        "test should not throw error without success handler" : function(){
+            this.xhr.readyState = 4;
+            this.xhr.status = 200;
+
+            ajax.get("/url");
+
+            assertNoException(function(){
+                this.xhr.onreadystatechange();
+            }.bind(this));
         }
     });
 }());

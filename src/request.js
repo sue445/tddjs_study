@@ -10,7 +10,9 @@
 
     function requestComplete(transpot, options){
         if(transpot.status == 200){
-            options.success(transpot);
+            if(typeof options.success == "function"){
+                options.success(transpot);
+            }
         }
     }
 
@@ -24,6 +26,7 @@
             throw new TypeError("URL should be string");
         }
 
+        options = options || {};
         var transport = tddjs.ajax.create();
         transport.open("GET", url, true);
         transport.onreadystatechange = function(){
