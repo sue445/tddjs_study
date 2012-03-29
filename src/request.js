@@ -53,4 +53,23 @@ tddjs.noop = function(){};
     }
 
     ajax.get = get;
+
+    function request(url, options){
+        if(typeof url != "string"){
+            throw new TypeError("URL should be string");
+        }
+
+        options = options || {};
+        var transport = tddjs.ajax.create();
+        transport.open("GET", url, true);
+        transport.onreadystatechange = function(){
+            if(transport.readyState == 4){
+                requestComplete(transport, options);
+                transport.onreadystatechange = tddjs.noop;
+            }
+        };
+        transport.send(null);
+    }
+
+    ajax.request = request;
 }());
