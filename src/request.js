@@ -61,7 +61,7 @@ tddjs.noop = function(){};
 
         options = options || {};
         var transport = tddjs.ajax.create();
-        transport.open("GET", url, true);
+        transport.open(options.method ||  "GET", url, true);
         transport.onreadystatechange = function(){
             if(transport.readyState == 4){
                 requestComplete(transport, options);
