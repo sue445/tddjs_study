@@ -10,12 +10,22 @@ tddjs.noop = function(){};
 (function(){
     var ajax = tddjs.namespace("ajax");
 
-    function requestComplete(transpot, options){
+    function isSuccess(transpot){
         var status = transpot.status;
 
-        if(status == 200 || (tddjs.isLocal() && !status)){
+        return (status >= 200 && status < 300) ||
+            status == 304 ||
+            (tddjs.isLocal() && !status);
+    }
+
+    function requestComplete(transpot, options){
+        if(isSuccess(transpot)){
             if(typeof options.success == "function"){
                 options.success(transpot);
+            }
+        } else{
+            if(typeof options.success == "function"){
+                options.failure(transpot);
             }
         }
     }
