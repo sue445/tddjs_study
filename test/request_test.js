@@ -8,7 +8,27 @@
 (function(){
     var ajax = tddjs.ajax;
 
-    TestCase("GetRequestTest", {
+
+    function forceStatusAndReadyState(xhr, status, rs){
+        var success = stubFn();
+        var failure = stubFn();
+
+        ajax.get("/url", {
+            success: success,
+            failure: failure
+        });
+
+        xhr.status = status;
+        xhr.readyStateChange(rs);
+
+        return{
+            success: success.called,
+            failure: failure.called
+        };
+
+    }
+
+   TestCase("GetRequestTest", {
         setUp : function(){
             this.ajaxCreate = ajax.create;
             this.xhr = Object.create(fakeXMLHttpRequest);
@@ -73,15 +93,8 @@
         },
 
         "test should call success handler for status 200" : function(){
-            this.xhr.readyState = 4;
-            this.xhr.status = 200;
-
-            var success = stubFn();
-
-            ajax.get("/url", {success : success});
-            this.xhr.onreadystatechange();
-
-            assert(success.called);
+            var request = forceStatusAndReadyState(this.xhr, 200, 4);
+            assert(request.success);
         },
 
         "test should not throw error without success handler" : function(){
@@ -105,14 +118,10 @@
         },
 
         "test should call success handler for local requests" : function(){
-            this.xhr.readyState = 4;
-            this.xhr.status = 0;
-            var success = stubFn();
             tddjs.isLocal = stubFn(true);
 
-            ajax.get("file.html", {success: success});
-            this.xhr.onreadystatechange();
-            assert(success.called);
+            var request = forceStatusAndReadyState(this.xhr, 0, 4);
+            assert(request.success);
         }
     });
 }());
