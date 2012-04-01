@@ -132,6 +132,24 @@
 
             assertEquals("POST", this.xhr.open.args[0]);
         }
-    })
+    });
+
+    TestCase("PostRequestTest", {
+        setUp:function(){
+            this.ajaxRequest = ajax.request;
+        },
+
+        tearDown: function(){
+            ajax.request = this.ajaxRequest;
+        },
+
+        "test should call request with POST method" : function(){
+            ajax.request = stubFn();
+
+            ajax.post("/url");
+
+            assertEquals("POST", ajax.request.args[1].method)
+        }
+    });
 }());
 
