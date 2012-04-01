@@ -63,5 +63,12 @@ TestCase("ObjectExtendTest", {
 
         assertEquals("function", typeof object.getName);
         assertEquals("function", typeof object.setName);
+    },
+
+    "test should return new object when source is null" : function(){
+        var object = tddjs.extend(null, this.dummy);
+
+        assertEquals("function", typeof object.getName);
+        assertEquals("function", typeof object.setName);
     }
 });
