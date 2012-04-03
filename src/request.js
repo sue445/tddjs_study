@@ -35,6 +35,27 @@ tddjs.noop = function(){};
 //        return;
 //    }
 
+    function create(){
+        var options = [
+            function(){
+                return new ActiveXObject("Microsoft.XMLHTTP");
+            },
+
+            function(){
+                return new XMLHttpRequest();
+            }
+        ];
+
+        for(var i = 0, l = options.length; i < l; i++){
+            try{
+                return options[i]();
+            } catch(e){}
+        }
+
+        return null;
+    }
+    ajax.create = create;
+
     function get(url, options){
         options = options || {};
         options.method = "GET";
@@ -48,7 +69,9 @@ tddjs.noop = function(){};
             throw new TypeError("URL should be string");
         }
 
-        options = options || {};
+        options = tddjs.extend({}, options);
+        options.data = tddjs.util.urlParams(options.data);
+
         var transport = tddjs.ajax.create();
         transport.open(options.method ||  "GET", url, true);
         transport.onreadystatechange = function(){

@@ -29,6 +29,7 @@
     }
 
     function setUp(){
+        this.tddjsUrlParams = tddjs.util.urlParams;
         this.tddjsIsLocal = tddjs.isLocal;
         this.ajaxCreate = ajax.create;
         this.xhr = Object.create(fakeXMLHttpRequest);
@@ -36,6 +37,7 @@
     }
 
     function tearDown(){
+        tddjs.util.urlParams = this.tddjsUrlParams;
         this.isLocal = this.tddjsIsLocal;
         ajax.create = this.ajaxCreate;
     }
@@ -149,6 +151,15 @@
             ajax.post("/url");
 
             assertEquals("POST", ajax.request.args[1].method)
+        },
+
+        "test should encode data" : function(){
+            tddjs.util.urlParams = stubFn();
+
+            var object = { field1: "13", field2 : "Lots of data!"};
+
+            ajax.request("/url", {data : object, method : "POST"});
+            assertSame(object, tddjs.util.urlParams.args[0]);
         }
     });
 }());
