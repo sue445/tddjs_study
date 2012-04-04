@@ -70,10 +70,11 @@ tddjs.noop = function(){};
         }
 
         options = tddjs.extend({}, options);
+        options.url = url;
         setData(options);
 
         var transport = tddjs.ajax.create();
-        transport.open(options.method ||  "GET", url, true);
+        transport.open(options.method ||  "GET", options.url, true);
         transport.onreadystatechange = function(){
             if(transport.readyState == 4){
                 requestComplete(transport, options);
@@ -84,8 +85,13 @@ tddjs.noop = function(){};
     }
 
     function setData(options){
-        if(options.method == "POST"){
+        if(options.data){
             options.data = tddjs.util.urlParams(options.data);
+
+            if(options.method == "GET"){
+                options.url += "?" + options.data;
+                options.data = null;
+            }
         } else{
             options.data = null;
         }

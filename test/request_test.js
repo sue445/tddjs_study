@@ -165,6 +165,16 @@
 
             ajax.request("/url", {data : object, method : "POST"});
             assertEquals(expected, this.xhr.send.args[0]);
+        },
+
+        "test should send data on URL for GET" : function(){
+            var url = "/url";
+            var object = { field1: "$13", field2 : "Lots of data!"};
+            var expected = url + "?" + tddjs.util.urlParams(object);
+
+            ajax.request(url, {data : object, method : "GET"});
+
+            assertEquals(expected, this.xhr.open.args[1]);
         }
     });
 }());
