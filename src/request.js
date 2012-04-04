@@ -70,13 +70,7 @@ tddjs.noop = function(){};
         }
 
         options = tddjs.extend({}, options);
-        options.data = tddjs.util.urlParams(options.data);
-
-        var data = null;
-
-        if(options.method == "POST"){
-            data = options.data;
-        }
+        setData(options);
 
         var transport = tddjs.ajax.create();
         transport.open(options.method ||  "GET", url, true);
@@ -86,7 +80,15 @@ tddjs.noop = function(){};
                 transport.onreadystatechange = tddjs.noop;
             }
         };
-        transport.send(data);
+        transport.send(options.data);
+    }
+
+    function setData(options){
+        if(options.method == "POST"){
+            options.data = tddjs.util.urlParams(options.data);
+        } else{
+            options.data = null;
+        }
     }
 
     ajax.request = request;
