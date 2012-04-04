@@ -35,6 +35,47 @@ tddjs.noop = function(){};
 //        return;
 //    }
 
+
+    function setData(options){
+        if(options.data){
+            options.data = tddjs.util.urlParams(options.data);
+
+            if(options.method == "GET"){
+                options.url += "?" + options.data;
+                options.data = null;
+            }
+        } else{
+            options.data = null;
+        }
+    }
+
+    function defaultHeader(transport, headers, header, val){
+        if(!headers[header]){
+            transport.setRequestHeader(header, val);
+        }
+    }
+
+    function setHeaders(options){
+        var headers = options.headers || {};
+        var transport = options.transport;
+
+        tddjs.each(headers, function(header, value){
+            transport.setRequestHeader(header, value);
+        });
+
+        if(options.method == "POST" && options.data){
+            defaultHeader(transport, headers,
+                            "Content-Type", "application/x-www-form-unlencoded");
+            defaultHeader(transport, headers,
+                "Content-Length", options.data.length);
+        }
+
+        defaultHeader(transport, headers,
+            "X-Requested-With", "XMLHttpRequest");
+
+    }
+
+    // public methods
     function create(){
         var options = [
             function(){
@@ -82,19 +123,6 @@ tddjs.noop = function(){};
             }
         };
         transport.send(options.data);
-    }
-
-    function setData(options){
-        if(options.data){
-            options.data = tddjs.util.urlParams(options.data);
-
-            if(options.method == "GET"){
-                options.url += "?" + options.data;
-                options.data = null;
-            }
-        } else{
-            options.data = null;
-        }
     }
 
     ajax.request = request;
