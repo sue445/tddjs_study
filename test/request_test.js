@@ -32,6 +32,7 @@
         this.tddjsUrlParams = tddjs.util.urlParams;
         this.tddjsIsLocal = tddjs.isLocal;
         this.ajaxCreate = ajax.create;
+        this.ajaxRequest = ajax.request;
         this.xhr = Object.create(fakeXMLHttpRequest);
         ajax.create = stubFn(this.xhr);
     }
@@ -40,6 +41,7 @@
         tddjs.util.urlParams = this.tddjsUrlParams;
         this.isLocal = this.tddjsIsLocal;
         ajax.create = this.ajaxCreate;
+        ajax.request = this.ajaxRequest;
     }
 
     TestCase("GetRequestTest", {
@@ -137,15 +139,8 @@
     });
 
     TestCase("PostRequestTest", {
-        setUp:function(){
-            this.ajaxRequest = ajax.request;
-        },
-
-        tearDown: function(){
-            ajax.request = this.ajaxRequest;
-        },
-//        setUp : setUp,
-//        tearDown : tearDown,
+        setUp : setUp,
+        tearDown : tearDown,
 
         "test should call request with POST method" : function(){
             ajax.request = stubFn();
